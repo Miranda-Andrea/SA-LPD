@@ -1,0 +1,43 @@
+package comDiccionario;
+
+import java.util.HashMap;
+import java.util.Scanner;
+
+public class DiccionarioEspIng {
+
+    public static void main(String[] args) {
+        // Crear el diccionario Español-Inglés
+        HashMap<String, String> diccionario = new HashMap<>();
+        diccionario.put("gato", "cat");
+        diccionario.put("perro", "dog");
+        diccionario.put("casa", "house");
+        diccionario.put("árbol", "tree");
+        diccionario.put("sol", "sun");
+        diccionario.put("luna", "moon");
+        diccionario.put("estrella", "star");
+        diccionario.put("cielo", "sky");
+        diccionario.put("mar", "sea");
+        diccionario.put("río", "river");
+        diccionario.put("montaña", "mountain");
+        diccionario.put("valle", "valley");
+        diccionario.put("mesa", "table");
+        diccionario.put("silla", "chair");
+        diccionario.put("libro", "book");
+        diccionario.put("página", "page");
+        diccionario.put("palabra", "word");
+        diccionario.put("frase", "sentence");
+        diccionario.put("letra", "letter");
+        diccionario.put("número", "number");
+
+        Scanner scanner = new Scanner(System.in);
+        System.out.println("Escribe una palabra en español para traducirla al inglés:");
+        String palabraUsuario = scanner.nextLine().toLowerCase();
+
+        // Buscar la palabra en el diccionario y mostrar la traducción o un mensaje de error
+        if(diccionario.containsKey(palabraUsuario)) {
+            System.out.println("La traducción al inglés es: " + diccionario.get(palabraUsuario));
+        } else {
+            System.out.println("La palabra no se encuentra en el diccionario.");
+        }
+    }
+}

@@ -1,0 +1,62 @@
+package comCountdown;
+import java.util.Scanner;
+
+public class CountdownFinDeSemana {
+
+    public static void main(String[] args) {
+        try (Scanner scanner = new Scanner(System.in)) {
+			boolean datosValidos = false;
+			int minutosHastaFinDeSemana = 0;
+
+			while (!datosValidos) {
+			    try {
+			        System.out.println("Ingrese el día de la semana (lunes a viernes):");
+			        String dia = scanner.nextLine().toLowerCase();
+			        System.out.println("Ingrese la hora (0-23):");
+			        int hora = Integer.parseInt(scanner.nextLine());
+			        System.out.println("Ingrese los minutos (0-59):");
+			        int minutos = Integer.parseInt(scanner.nextLine());
+
+			        if (hora < 0 || hora > 23 || minutos < 0 || minutos > 59 || !esDiaValido(dia)) {
+			            System.out.println("Datos inválidos, por favor intente de nuevo.");
+			        } else {
+			            datosValidos = true;
+			            minutosHastaFinDeSemana = calcularMinutosHastaFinDeSemana(dia, hora, minutos);
+			        }
+			    } catch (NumberFormatException e) {
+			        System.out.println("Entrada inválida, por favor intente de nuevo.");
+			    }
+			}
+
+			System.out.println("Faltan " + minutosHastaFinDeSemana + " minutos para el fin de semana.");
+		}
+    }
+
+    private static boolean esDiaValido(String dia) {
+        return dia.equals("lunes") || dia.equals("martes") || dia.equals("miércoles")
+                || dia.equals("jueves") || dia.equals("viernes");
+    }
+
+    private static int calcularMinutosHastaFinDeSemana(String dia, int hora, int minutos) {
+        int minutosTotales = 0;
+        switch (dia) {
+            case "lunes":
+                minutosTotales += 4 * 24 * 60;
+                break;
+            case "martes":
+                minutosTotales += 3 * 24 * 60;
+                break;
+            case "miércoles":
+                minutosTotales += 2 * 24 * 60;
+                break;
+            case "jueves":
+                minutosTotales += 24 * 60;
+                break;
+            case "viernes":
+                minutosTotales += 0;
+                break;
+        }
+        minutosTotales += (15 * 60) - (hora * 60 + minutos);
+        return minutosTotales;
+    }
+}

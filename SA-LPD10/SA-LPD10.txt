@@ -1,0 +1,61 @@
+package Traductor;
+
+import java.util.HashMap;
+import java.util.Scanner;
+import java.util.ArrayList;
+import java.util.Collections;
+
+public class TraductorEspanolIngles {
+
+    public static void main(String[] args) {
+        // Crear el diccionario Español-Inglés usando un HashMap
+        HashMap<String, String> diccionario = new HashMap<>();
+        diccionario.put("casa", "house");
+        diccionario.put("perro", "dog");
+        diccionario.put("gato", "cat");
+        diccionario.put("árbol", "tree");
+        diccionario.put("libro", "book");
+        diccionario.put("mar", "sea");
+        diccionario.put("cielo", "sky");
+        diccionario.put("sol", "sun");
+        diccionario.put("luna", "moon");
+        diccionario.put("estrella", "star");
+        diccionario.put("flor", "flower");
+        diccionario.put("río", "river");
+        diccionario.put("montaña", "mountain");
+        diccionario.put("bosque", "forest");
+        diccionario.put("camino", "path");
+        diccionario.put("ciudad", "city");
+        diccionario.put("pueblo", "village");
+        diccionario.put("coche", "car");
+        diccionario.put("avión", "plane");
+        diccionario.put("barco", "boat");
+
+        // Seleccionar al azar 5 palabras en español del diccionario
+        ArrayList<String> palabrasEspanol = new ArrayList<>(diccionario.keySet());
+        Collections.shuffle(palabrasEspanol);
+        ArrayList<String> seleccionadas = new ArrayList<>(palabrasEspanol.subList(0, 5));
+
+        Scanner scanner = new Scanner(System.in);
+        int correctas = 0, incorrectas = 0;
+
+        // Pedir al usuario la traducción al inglés de cada palabra seleccionada
+        for (String palabra : seleccionadas) {
+            System.out.println("Introduce la traducción en inglés para la palabra: " + palabra);
+            String traduccionUsuario = scanner.nextLine().trim().toLowerCase();
+
+            if (diccionario.get(palabra).equals(traduccionUsuario)) {
+                System.out.println("Correcto!");
+                correctas++;
+            } else {
+                System.out.println("Incorrecto! La traducción correcta es: " + diccionario.get(palabra));
+                incorrectas++;
+            }
+        }
+
+        // Mostrar el número de respuestas correctas e incorrectas
+        System.out.println("Has acertado " + correctas + " palabras.");
+        System.out.println("Has fallado " + incorrectas + " palabras.");
+    }
+}
+

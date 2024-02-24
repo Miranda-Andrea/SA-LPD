@@ -1,0 +1,68 @@
+package comNumerosPrimos;
+
+import java.util.Scanner;
+
+public class NumerosPrimosAlPrincipio {
+
+    public static void main(String[] args) {
+        Scanner scanner = new Scanner(System.in);
+        int[] numeros = new int[10];
+        
+        // Leer los números del usuario
+        System.out.println("Ingrese 10 números:");
+        for (int i = 0; i < 10; i++) {
+            numeros[i] = scanner.nextInt();
+        }
+        
+        // Mostrar array original
+        System.out.println("Array original:");
+        for (int i = 0; i < numeros.length; i++) {
+            System.out.println(i + " - " + numeros[i]);
+        }
+        
+        // Reordenar el array colocando los primos al principio
+        int[] reordenado = reordenarConPrimosAlPrincipio(numeros);
+        
+        // Mostrar array reordenado
+        System.out.println("Array con primos al principio:");
+        for (int i = 0; i < reordenado.length; i++) {
+            System.out.println(i + " - " + reordenado[i]);
+        }
+    }
+
+    private static boolean esPrimo(int numero) {
+        if (numero <= 1) {
+            return false;
+        }
+        for (int i = 2; i <= Math.sqrt(numero); i++) {
+            if (numero % i == 0) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    private static int[] reordenarConPrimosAlPrincipio(int[] numeros) {
+        int[] resultado = new int[numeros.length];
+        int indicePrimo = 0;
+        int indiceNoPrimo = numeros.length - 1;
+        
+        for (int numero : numeros) {
+            if (esPrimo(numero)) {
+                resultado[indicePrimo++] = numero;
+            } else {
+                resultado[indiceNoPrimo--] = numero;
+            }
+        }
+        
+        // Invertir los elementos no primos para mantener el orden original entre ellos
+        for (int i = 0; i < indicePrimo / 2; i++) {
+            int temp = resultado[numeros.length - 1 - i];
+            resultado[numeros.length - 1 - i] = resultado[indicePrimo + i];
+            resultado[indicePrimo + i] = temp;
+        }
+        
+        return resultado;
+    }
+}
+
